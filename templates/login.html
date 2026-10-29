@@ -1,0 +1,6 @@
+{% extends 'auth_layout.html' %}
+{% block title %}Login{% endblock %}
+{% block auth_heading %}Good to have<br><span>you here.</span>{% endblock %}
+{% block auth_intro %}Every connection brings hope a little closer.{% endblock %}
+{% block auth_kicker %}YOUR ACCOUNT{% endblock %}{% block form_title %}Sign in to PulseLink{% endblock %}{% block form_subtitle %}Welcome back! Enter your details below.{% endblock %}
+{% block form_content %}<form method="post" class="form-stack"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><label>Email address<input type="email" name="email" required value="{{ request.form.get('email','') }}" placeholder="you@example.com"></label><label>Password<input type="password" name="password" required placeholder="Your password"></label><button class="btn btn-primary btn-wide" type="submit">Sign in →</button><p class="form-foot">New here? <a href="{{ url_for('register') }}">Create an account</a></p><div class="demo-hint"><strong>Demo account (after seeding)</strong><br>Email: donor.a@pulselink.demo<br>Password: Demo@123</div></form>{% endblock %}

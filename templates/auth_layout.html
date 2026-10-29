@@ -1,0 +1,4 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="auth-section"><div class="container auth-grid"><div class="auth-story"><p class="eyebrow">♥ THE POWER OF COMMUNITY</p><h1>{% block auth_heading %}Be the reason<br>someone <span>smiles.</span>{% endblock %}</h1><p>{% block auth_intro %}Join a community of people who show up for each other when it matters most.{% endblock %}</p><blockquote>“A few minutes to share. A lifetime of impact.”</blockquote></div><div class="auth-panel"><p class="eyebrow">{% block auth_kicker %}GET STARTED{% endblock %}</p><h2>{% block form_title %}Create your account{% endblock %}</h2><p class="muted small">{% block form_subtitle %}Let's make a difference together.{% endblock %}</p>{% block form_content %}{% endblock %}</div></div></section>
+{% endblock %}

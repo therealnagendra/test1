@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c9274b">
+  <meta name="description" content="PulseLink connects voluntary blood donors with people seeking blood.">
+  <title>{% block title %}PulseLink{% endblock %} · PulseLink</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">♥</span><span>PulseLink</span></a>
+    <button class="menu-toggle" type="button" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">☰</button>
+    <nav class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      {% if current_user %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      {% endif %}
+      <a href="{{ url_for('donors') }}">Find donors</a>
+      <a href="{{ url_for('blood_requests') }}">Requests</a>
+      {% if current_user %}
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <span class="nav-user">{{ current_user.full_name }}</span>
+        <form class="nav-logout" method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="nav-link-button" type="submit">Log out</button></form>
+      {% else %}
+        <a href="{{ url_for('login') }}">Log in</a>
+        <a class="btn btn-small btn-primary" href="{{ url_for('register') }}">Join the network ↗</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+<main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="container flash-stack">{% for category, message in messages %}<div class="flash flash-{{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner"><a class="brand footer-brand" href="{{ url_for('index') }}"><span class="brand-mark">♥</span><span>PulseLink</span></a><p>Connecting people. Supporting life-saving donations.</p><small>Educational demonstration project · Not an emergency medical service</small></div>
+</footer>
+</body>
+</html>
